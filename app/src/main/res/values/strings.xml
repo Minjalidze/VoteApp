@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AnonymousVotes</string>
+
+    <!-- Кнопки навигации -->
+    <string name="nav_home"></string>
+    <string name="nav_quiz"></string>
+    <string name="nav_settings"></string>
+    <string name="nav_history"></string>
+    <!-- **************** -->
 </resources>
