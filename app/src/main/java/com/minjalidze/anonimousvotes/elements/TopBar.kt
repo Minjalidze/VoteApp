@@ -12,33 +12,26 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import com.minjalidze.anonimousvotes.R
 
-class TopBar {
-    companion object {
-        @JvmStatic
-        @OptIn(ExperimentalMaterial3Api::class)
-        @Composable
-        fun TopApplicationBar() {
-            TopAppBar(
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = colorResource(id = R.color.colorAccent)
-                ),
-                title = {
-                    Column {
-                        Text(text = "Anonymous Votes",
-                                        color = Color.White)
-                        Text(text = "Сервис анонимных голосований", style = typography.labelSmall,
-                                        color = Color.White)
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(Icons.Filled.ArrowBack, "", tint = Color.Black)
-                    }
-                }
-            )
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopApplicationBar() {
+    TopAppBar(
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = com.minjalidze.anonimousvotes.ui.theme.DLighterBlack
+        ),
+        title = {
+            Column {
+                Text(text = "Anonymous Votes",
+                    color = Color.White)
+                Text(text = "Сервис анонимных голосований", style = typography.labelSmall,
+                    color = Color.White)
+            }
+        },
+        navigationIcon = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Filled.ArrowBack, "", tint = Color.Black)
+            }
         }
-    }
+    )
 }
