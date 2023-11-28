@@ -1,4 +1,4 @@
-package com.minjalidze.anonimousvotes.navigation
+package com.minjalidze.anonimousvotes.ui.visuals.navigation
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -11,7 +11,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.minjalidze.anonimousvotes.ui.theme.DBlue
-import com.minjalidze.anonimousvotes.ui.theme.DGray
 import com.minjalidze.anonimousvotes.ui.theme.DWhite
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -31,7 +30,7 @@ fun BottomNavigationBar(navController: NavController) {
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
                 label = { Text(item.title) },
                 selectedContentColor = DWhite,
-                unselectedContentColor = DGray.copy(0.4f),
+                unselectedContentColor = DWhite.copy(0.4f),
                 alwaysShowLabel = false,
                 selected = currentRoute == item.route,
                 onClick = {

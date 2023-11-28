@@ -1,4 +1,4 @@
-package com.minjalidze.anonimousvotes.screens
+package com.minjalidze.anonimousvotes.ui.visuals.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import com.minjalidze.anonimousvotes.ui.theme.DDarkBlack
 
 @Composable
-fun SettingsScreen() {
+fun HistoryScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -23,7 +23,7 @@ fun SettingsScreen() {
             .wrapContentSize(Alignment.Center)
     ) {
         Text(
-            text = "Settings View",
+            text = "History View",
             fontWeight = FontWeight.Bold,
             color = Color.White,
             modifier = Modifier.align(Alignment.CenterHorizontally),

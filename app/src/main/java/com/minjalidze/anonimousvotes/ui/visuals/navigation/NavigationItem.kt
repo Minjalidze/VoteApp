@@ -1,4 +1,4 @@
-package com.minjalidze.anonimousvotes.navigation
+package com.minjalidze.anonimousvotes.ui.visuals.navigation
 
 import com.minjalidze.anonimousvotes.R
 
