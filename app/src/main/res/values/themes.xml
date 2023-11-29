@@ -2,10 +2,10 @@
 <resources>
     <style name="Theme.AnonymousVotes" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">
-            @android:color/transparent
+            @color/lighterBlack
         </item>
         <item name="android:navigationBarColor">
-            @android:color/transparent
+            @color/lighterBlack
         </item>
     </style>
 </resources>
