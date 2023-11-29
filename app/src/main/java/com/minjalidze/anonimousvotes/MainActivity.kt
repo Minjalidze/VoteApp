@@ -38,7 +38,7 @@ import com.minjalidze.anonimousvotes.ui.visuals.screens.SettingsScreen
 import com.minjalidze.anonimousvotes.ui.visuals.topbar.TopApplicationBar
 
 class MainActivity : ComponentActivity() {
-    private var _currentScreen : String = "";
+    private var _currentScreen : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

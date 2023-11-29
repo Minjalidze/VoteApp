@@ -1,6 +1,7 @@
 package com.minjalidze.anonimousvotes.ui.visuals.elements
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,13 +36,14 @@ import com.minjalidze.anonimousvotes.ui.theme.DGray
 import com.minjalidze.anonimousvotes.ui.theme.DLighterBlack
 
 @Composable
-fun VoteModelCard(voteModel: VoteModel) {
+fun VoteModelCard(voteModel: VoteModel, onClick: () -> Unit) {
     ElevatedCard (
         elevation = CardDefaults.cardElevation( defaultElevation = 12.dp ),
         modifier = Modifier
             .height(300.dp)
             .fillMaxWidth()
-            .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)) {
+            .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
+            .clickable(enabled = true, onClick = { onClick() })) {
         Column {
             Row(
                 modifier = Modifier
