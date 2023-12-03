@@ -36,13 +36,22 @@ import com.minjalidze.anonimousvotes.ui.visuals.screens.HistoryScreen
 import com.minjalidze.anonimousvotes.ui.visuals.screens.HomeScreen
 import com.minjalidze.anonimousvotes.ui.visuals.screens.SettingsScreen
 import com.minjalidze.anonimousvotes.ui.visuals.topbar.TopApplicationBar
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
     private var _currentScreen : String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    @OptIn(DelicateCoroutinesApi::class)
+    override fun onCreate(savedInstanceState: Bundle?) = runBlocking {
         super.onCreate(savedInstanceState)
-        API.initialize()
+
+        GlobalScope.launch(Dispatchers.IO) {
+            API.initialize()
+        }
 
         setContent {
             AnonimousVotesTheme {
@@ -55,11 +64,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MainScreen() {
         val navController = rememberNavController()
-
         var showModal by remember { mutableStateOf(false) }
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-
-        val currentRoute = navBackStackEntry?.destination?.route
 
         Scaffold(
             modifier = Modifier.fillMaxSize(),
@@ -75,6 +80,8 @@ class MainActivity : ComponentActivity() {
                 }
             },
             floatingActionButton = {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
                 if (currentRoute == NavigationItem.Home.route) {
                     FloatingActionButton(modifier = Modifier
                         .size(40.dp), onClick = { showModal = true }) {
@@ -104,11 +111,13 @@ class MainActivity : ComponentActivity() {
                 _currentScreen = NavigationItem.History.route
             }
             composable(
-                route = "vote/{deepLinkArg}",
-                arguments = listOf(navArgument("deepLinkArg") { type = NavType.StringType })
+                route = "vote/{id}",
+                arguments = listOf(navArgument("id") { type = NavType.IntType })
             ) { backStackEntry ->
-                val deepLinkArg = backStackEntry.arguments?.getString("deepLinkArg")
-                HomeScreen()
+                val argID = backStackEntry.arguments!!.getInt("id")
+
+                HomeScreen(argID, true)
+                _currentScreen = NavigationItem.Home.route
             }
         }
         navController.handleDeepLink(intent)
