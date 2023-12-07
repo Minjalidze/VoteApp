@@ -27,7 +27,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import com.minjalidze.anonimousvotes.data.api.API
+import com.minjalidze.anonimousvotes.data.models.Authorization
+import com.minjalidze.anonimousvotes.filesystem.INI
+import com.minjalidze.anonimousvotes.service.APIService
 import com.minjalidze.anonimousvotes.ui.theme.AnonimousVotesTheme
 import com.minjalidze.anonimousvotes.ui.visuals.elements.ShowDialog
 import com.minjalidze.anonimousvotes.ui.visuals.navigation.BottomNavigationBar
@@ -36,13 +41,20 @@ import com.minjalidze.anonimousvotes.ui.visuals.screens.HistoryScreen
 import com.minjalidze.anonimousvotes.ui.visuals.screens.HomeScreen
 import com.minjalidze.anonimousvotes.ui.visuals.screens.SettingsScreen
 import com.minjalidze.anonimousvotes.ui.visuals.topbar.TopApplicationBar
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
+import retrofit2.Retrofit
 
 class MainActivity : ComponentActivity() {
+    companion object {
+        var settingsINI: INI = INI("")
+    }
     private var _currentScreen : String = ""
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -51,6 +63,33 @@ class MainActivity : ComponentActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             API.initialize()
+        }
+
+        val path = getExternalFilesDir(null)
+
+        settingsINI = INI("$path/settings.ini")
+        if (!settingsINI.load()) {
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://vote-mobile-api.whywelive.me")
+                .build()
+            val service = retrofit.create(APIService::class.java)
+            CoroutineScope(Dispatchers.IO).launch {
+                val response = service.register()
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val gson = GsonBuilder().setPrettyPrinting().create()
+                        val prettyJson = gson.toJson(
+                            JsonParser.parseString( response.body() ?.string() )
+                        )
+                        val authToken: Authorization = Json.decodeFromString(prettyJson)
+                        settingsINI.set("authToken", authToken.token)
+                        settingsINI.set("selectedGradient", "0")
+                        settingsINI.store()
+                    }
+                }
+            }
+        } else {
+            val authToken = settingsINI.get("authToken")
         }
 
         setContent {
