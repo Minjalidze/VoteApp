@@ -1,4 +1,4 @@
-package com.minjalidze.anonimousvotes.data.models
+package com.minjalidze.anonimousvotes.data.models.vote
 
 import kotlinx.serialization.Serializable
 

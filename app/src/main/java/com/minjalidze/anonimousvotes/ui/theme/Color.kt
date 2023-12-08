@@ -17,16 +17,26 @@ val DLighterBlack = Color(0xFF2c2f33)
 val DDarkBlack = Color(0xFF23272a)
 val DGreen = Color(0xFF57F287)
 
-val Color_Transp_1 = Color(0xFFEFF2FF)
-val Color_Transp_2 = Color(0xFF6788E2)
+val gradient_OceanBlue_first = Color(0xFF2E3192)
+val gradient_OceanBlue_second = Color(0xFF1BFFFF)
 
-val ComponentColor1 = Color(0xffDBD4FE)
-val ComponentColor2 = Color(0xffE5F19D)
-val ComponentColor3= Color(0xffDFFEF8)
-val BackgroundColor = Color(0xff101011)
-val SecondaryColor = Color(0xffFFE5C1)
-val ThinTextColor = Color(0xffD2D2D3)
-val CardColor = Color(0xff222223)
-val TextColor = Color(0xffFCFCFC)
-val HighBackgroundColor = Color(0xffFE4243)
-val MediumBackgroundColor = Color(0xffBC8D14)
+val gradient_Sanguine_first = Color(0xFFD4145A)
+val gradient_Sanguine_second = Color(0xFFFBB03B)
+
+val gradient_LusciousLime_first = Color(0xFF009245)
+val gradient_LusciousLime_second = Color(0xFFFCEE21)
+
+val gradient_PurpleLake_first = Color(0xFF662D8C)
+val gradient_PurpleLake_second = Color(0xFFED1E79)
+
+val gradient_Piglet_first = Color(0xFFEE9CA7)
+val gradient_Piglet_second = Color(0xFFFFDDE1)
+
+val gradient_Kashmir_first = Color(0xFF614385)
+val gradient_Kashmir_second = Color(0xFF516395)
+
+val gradient_GreenBeach_first = Color(0xFF02AABD)
+val gradient_GreenBeach_second = Color(0xFF00CDAC)
+
+val gradient_BloodyMary_first = Color(0xFFFF512F)
+val gradient_BloodyMary_second = Color(0xFFDD2476)

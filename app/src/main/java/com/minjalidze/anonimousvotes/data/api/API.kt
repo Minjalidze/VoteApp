@@ -1,6 +1,6 @@
 package com.minjalidze.anonimousvotes.data.api
 
-import com.minjalidze.anonimousvotes.data.models.VoteModel
+import com.minjalidze.anonimousvotes.data.models.vote.VoteModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -10,7 +10,7 @@ import java.nio.charset.Charset
 
 class API {
     companion object {
-        private var votes: ArrayList<VoteModel> = ArrayList()
+        private lateinit var votes: ArrayList<VoteModel>
 
         @JvmStatic
         suspend fun initialize() = coroutineScope {

@@ -31,12 +31,12 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import com.minjalidze.anonimousvotes.data.api.API
 import com.minjalidze.anonimousvotes.data.models.Authorization
+import com.minjalidze.anonimousvotes.data.models.navigation.NavigationItem
 import com.minjalidze.anonimousvotes.filesystem.INI
 import com.minjalidze.anonimousvotes.service.APIService
 import com.minjalidze.anonimousvotes.ui.theme.AnonimousVotesTheme
 import com.minjalidze.anonimousvotes.ui.visuals.elements.ShowDialog
 import com.minjalidze.anonimousvotes.ui.visuals.navigation.BottomNavigationBar
-import com.minjalidze.anonimousvotes.ui.visuals.navigation.NavigationItem
 import com.minjalidze.anonimousvotes.ui.visuals.screens.HistoryScreen
 import com.minjalidze.anonimousvotes.ui.visuals.screens.HomeScreen
 import com.minjalidze.anonimousvotes.ui.visuals.screens.SettingsScreen
