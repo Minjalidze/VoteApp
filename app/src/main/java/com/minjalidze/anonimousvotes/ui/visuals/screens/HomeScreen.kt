@@ -34,7 +34,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.minjalidze.anonimousvotes.data.api.API
-import com.minjalidze.anonimousvotes.data.api.API.Companion.getVotes
 import com.minjalidze.anonimousvotes.ui.theme.DDarkBlack
 import com.minjalidze.anonimousvotes.ui.theme.DGray
 import com.minjalidze.anonimousvotes.ui.visuals.elements.VoteModelCard
@@ -48,7 +47,7 @@ import kotlinx.coroutines.launch
 )
 @Composable
 fun HomeScreen(voteID: Int = -1, fromLink: Boolean = false) {
-    val votes = getVotes()
+    val votes = API.getVotes()
 
     val sheetState = rememberModalBottomSheetState()
 
@@ -88,9 +87,10 @@ fun HomeScreen(voteID: Int = -1, fromLink: Boolean = false) {
     }
 
     if (fromLink && !linkOpened) {
-        currentVoteID = voteID
         isSheetOpen = true
-        linkOpened = false
+
+        linkOpened = true
+        currentVoteID = voteID
     }
 
     if (isSheetOpen) {

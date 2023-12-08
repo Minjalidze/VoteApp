@@ -88,10 +88,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-        } else {
-            val authToken = settingsINI.get("authToken")
         }
-
         setContent {
             AnonimousVotesTheme {
                 MainScreen()

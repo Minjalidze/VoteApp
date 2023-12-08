@@ -2,7 +2,6 @@ package com.minjalidze.anonimousvotes.data.api
 
 import com.minjalidze.anonimousvotes.data.models.vote.VoteModel
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import java.net.URL
@@ -10,14 +9,13 @@ import java.nio.charset.Charset
 
 class API {
     companion object {
-        private lateinit var votes: ArrayList<VoteModel>
+        private var votes: ArrayList<VoteModel> = ArrayList()
 
         @JvmStatic
         suspend fun initialize() = coroutineScope {
             launch {
-                var str = URL("https://vote-mobile-api.whywelive.me/vote").readText(Charset.forName("UTF-8"))
+                val str = URL("https://vote-mobile-api.whywelive.me/vote").readText(Charset.forName("UTF-8"))
                 votes = Json.decodeFromString(str)
-                delay(1000L)
             }
         }
 
@@ -27,14 +25,7 @@ class API {
         }
         @JvmStatic
         fun selectVote(id: Int) : VoteModel? {
-            var neededVote: VoteModel? = null
-            votes.forEach {
-                if (it.id == id) {
-                    neededVote = it
-                    return@forEach
-                }
-            }
-            return neededVote
+            return votes.find { it.id == id }
         }
     }
 }

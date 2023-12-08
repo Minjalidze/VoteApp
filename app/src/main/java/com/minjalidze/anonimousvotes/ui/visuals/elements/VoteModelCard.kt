@@ -47,7 +47,7 @@ import com.minjalidze.anonimousvotes.ui.theme.getGradient
 fun VoteModelCard(voteModel: VoteModel, onClick: () -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
-    val selectedGradient = MainActivity.settingsINI.get("selectedGradient")!!.toInt()
+    val selectedGradient = MainActivity.settingsINI?.get("selectedGradient")?.toInt() ?: 0
     val gradient = getGradient(selectedGradient)
     val horizontalGradientBrush = Brush.horizontalGradient(
         colors = listOf(
