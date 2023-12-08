@@ -21,12 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import com.minjalidze.anonimousvotes.data.api.API
@@ -133,6 +132,8 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun Navigate(navController: NavHostController) {
+        val uri = "app://com.minjalidze.anonimousvotes"
+
         NavHost(navController, startDestination = NavigationItem.Home.route) {
             composable(NavigationItem.Home.route) {
                 HomeScreen()
@@ -147,12 +148,10 @@ class MainActivity : ComponentActivity() {
                 _currentScreen = NavigationItem.History.route
             }
             composable(
-                route = "vote/{id}",
-                arguments = listOf(navArgument("id") { type = NavType.IntType })
+                route = "vote?id={id}",
+                deepLinks = listOf(navDeepLink { uriPattern = "$uri/{id}" })
             ) { backStackEntry ->
-                val argID = backStackEntry.arguments!!.getInt("id")
-
-                HomeScreen(argID, true)
+                HomeScreen(backStackEntry.arguments?.getString("id")?.toInt() ?: 0, true)
                 _currentScreen = NavigationItem.Home.route
             }
         }
